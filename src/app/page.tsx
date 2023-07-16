@@ -1,9 +1,10 @@
-import { Button } from '@/components/ui/button'
+import dam from "./dam.jpg";
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen">
-      <div>Hello world</div>
+    <main className="flex item-center">
+      <img src={dam.src} />
     </main>
   )
 }
