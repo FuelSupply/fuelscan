@@ -2,12 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+'text': '#061408',
+'background': '#d7f4dc',
+'primary': '#4dcb60',
+'secondary': '#b8eabf',
+'accent': '#30a642',
+'text': 'hsl(0, 0%, 2%)',
+'background': 'hsl(0, 0%, 98%)',
+'primary': 'hsl(129, 55%, 55%)',
+'secondary': 'hsl(127, 53%, 90%)',
+'accent': 'hsl(129, 55%, 50%)',
+ */
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0, 0%, 98%;
     --foreground: 222.2 84% 4.9%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 129, 55%, 50%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     --popover: 0 0% 100%;
@@ -19,14 +32,14 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 129, 55%, 55%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 127, 53%, 90%;
+    --secondary-foreground: 129, 55%, 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 129, 55%, 50%;
+    --accent-foreground: 129, 55%, 55%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
