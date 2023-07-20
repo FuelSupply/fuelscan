@@ -35,7 +35,7 @@ export default function Home() {
           <div className="border border-purple-300">
             {
               blocks.map((block) => (
-                <Blocks block={block} ></Blocks>
+                <Blocks block={block} key={block.hash} ></Blocks>
               ))
             }
           </div>
@@ -43,7 +43,7 @@ export default function Home() {
         <div className="m-2 basis-1/4">
           {
             txs.map((tx) => (
-              <TransactionComponent tx={tx} ></TransactionComponent>
+              <TransactionComponent tx={tx} key={tx.hash}></TransactionComponent>
             ))
           }
         </div>
