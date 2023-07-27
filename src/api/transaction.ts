@@ -110,7 +110,7 @@ export interface TxPointer2 {
 
 
 export async function fetch_transaction(): Promise<any> {
-    let resp: any = await axios.get("api/transaction");
+    let resp: any = await axios.get("api/transactions");
     if (resp.status == 200) {
         return resp.data;
     }
