@@ -1,45 +1,21 @@
 import axios from "@/lib/axios";
 
 export interface Transaction {
-    gas_limit: number
-    status: Status
-    gas_price: number
-    block_hash: string
-    sender: string
-    hash: string
-    table_type: string
-    output: Output[]
+    id: string
     height: number
+    block_hash: string
+    tx_type: string
     da_height: number
-    input: Input[]
-    transaction_type: string
-}
-
-export interface Status {
-    Failure?: Failure
-    Success?: Success
-}
-
-export interface Failure {
-    block_id: string
-    time: number[]
+    gas_limit: string
+    gas_price: string
+    timestamp: number
+    sender: string
+    status: string
     reason: string
-    program_state: ProgramState
+    input: Input[]
+    output: Output[]
 }
 
-export interface ProgramState {
-    Revert: number
-}
-
-export interface Success {
-    block_id: string
-    time: number[]
-    program_state: ProgramState2
-}
-
-export interface ProgramState2 {
-    ReturnData: string
-}
 
 export interface Output {
     Contract?: Contract
@@ -109,8 +85,17 @@ export interface TxPointer2 {
 }
 
 
-export async function fetch_transaction(): Promise<any> {
-    let resp: any = await axios.get("api/transactions");
+export async function fetch_transactions(): Promise<Transaction[]> {
+    let resp: any = await axios.get("api/transaction");
+    if (resp.status == 200) {
+        return resp.data;
+    }
+
+    throw new Error("call api/transaction error");
+}
+
+export async function fetch_transaction(hash: string): Promise<Transaction> {
+    let resp: any = await axios.get("api/transaction/" + hash);
     if (resp.status == 200) {
         return resp.data;
     }
