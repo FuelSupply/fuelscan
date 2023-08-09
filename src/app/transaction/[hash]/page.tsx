@@ -4,16 +4,14 @@ import { Transaction, fetch_transaction } from "@/api/transaction";
 import { useEffect, useState } from "react";
 
 
-export default function transaction({ params }: { params: { hash: string } }) {
+export default function Transaction({ params }: { params: { hash: string } }) {
     let [tx, setTx] = useState<Transaction>();
+    let request = async () => {
+        let tx = await fetch_transaction(params.hash);
+        setTx(tx);
+    }
 
     useEffect(() => {
-        let request = async () => {
-            let tx = await fetch_transaction(params.hash);
-            console.log(tx);
-            setTx(tx);
-        }
-
         request()
     }, []);
 

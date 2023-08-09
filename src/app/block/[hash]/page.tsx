@@ -4,16 +4,15 @@ import { Block, details } from "@/api/block";
 import { useEffect, useState } from "react";
 
 
-export default function block({ params }: { params: { hash: string } }) {
+export default function Block({ params }: { params: { hash: string } }) {
     let [block, setBlock] = useState<Block>();
+    let request = async () => {
+        let block = await details(params.hash);
+        console.log(block);
+        setBlock(block);
+    }
 
     useEffect(() => {
-        let request = async () => {
-            let block = await details(params.hash);
-            console.log(block);
-            setBlock(block);
-        }
-
         request()
     }, []);
 
