@@ -2,7 +2,7 @@ import React from "react";
 import Head from 'next/head';
 import '@/assets/css/globals.css';
 import Header from "@/views/Home/Header";
-import Footer from "@/components/Footer";
+
 export default function RootLayout({
   children,
 }: {
@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        <Footer />
+
       </body>
     </html>
   )
