@@ -1,5 +1,5 @@
 import React from "react";
-import Block from "@/views/block"
+import Block from "@/views/Block"
 import { queryBlockDetail } from "@/api"
 export default async function BlockServer({ params }: { params: { id: string } }) {
 

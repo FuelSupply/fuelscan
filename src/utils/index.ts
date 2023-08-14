@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-
+import { message } from "antd"
 export const timeDifference = (knownTime: number) => {
 
     const currentTime = new Date().getTime();
@@ -15,4 +15,14 @@ export const timeDifference = (knownTime: number) => {
 
 export const timeFormat = (time: number) => {
     return dayjs(time * 1000).format("YYYY-MM-DD HH:mm:ss")
+}
+
+export function copyToClipboard(text: string) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    message.success("copied!")
 }
