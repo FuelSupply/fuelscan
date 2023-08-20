@@ -10,14 +10,14 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
 
     return <div className="container mx-auto mt-20">
         <div>
-            <span className="text-2xl mr-10">
+            <span className="mr-10 text-2xl">
                 Block
             </span>
             <span className="text-gray"># {blockDetail.height}</span>
         </div>
-        <div className=" rounded-md mt-20 border border-light-gray shadow-md p-20 bg-white">
+        <div className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray">
 
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Block Height:
                 </div>
@@ -25,7 +25,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.height}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     L1:
                 </div>
@@ -33,7 +33,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.da_height}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Timestamp:
                 </div>
@@ -41,7 +41,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {timeFormat(blockDetail.timestamp)}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Prevent Root:
                 </div>
@@ -49,7 +49,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.prev_root}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Hash
                 </div>
@@ -57,19 +57,19 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.id}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Transactions:
                 </div>
                 <div className="flex items-center">
-                    <div className=" text-steel-blue w-120 text-center mr-5 rounded-lg bg-off-white cursor-pointer">
+                    <div className="mr-5 text-center rounded-lg cursor-pointer text-steel-blue w-120 bg-off-white">
                         {blockDetail.transactions.length}
                         transactions
                     </div>
                     in this block
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Transactions Root:
                 </div>
@@ -77,7 +77,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.transactions_root}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Coinbase
                 </div>
@@ -85,7 +85,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.coinbase}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Coinbase Amount
                 </div>
@@ -93,7 +93,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.coinbase_amount}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Coinbase Hash
                 </div>
@@ -101,7 +101,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.coinbase_hash}
                 </div>
             </div>
-            <div className="flex item-center border-b border-light-gray pt-15 pb-15">
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Output Messages Root Hash
                 </div>

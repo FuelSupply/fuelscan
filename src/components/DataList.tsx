@@ -24,7 +24,10 @@ export default function DataList({ txs, blocks, type }: { txs?: Transaction[], b
                         <div className="flex items-center">
                             <GiStoneBlock className="text-3xl" />
                             <div className="ml-10">
-                                <p className="text-lg cursor-pointer text-dark-blue">{v.height}</p>
+                                <Link href={`/block/${v.id}`}>
+                                    <p className="text-lg cursor-pointer text-dark-blue">{v.height}</p>
+                                </Link>
+
                                 <p className="text-sm text-gray">{timeFormat(v.timestamp)} </p>
                             </div>
                         </div>
@@ -36,7 +39,10 @@ export default function DataList({ txs, blocks, type }: { txs?: Transaction[], b
                                 </Link>
                             </p>
                             <p className="text-sm text-left text-gray">
-                                <span className="cursor-pointer text-dark-blue">{v.count} txns</span>
+                                <Link href={`/block/${v.id}`}>
+                                    <span className="cursor-pointer text-dark-blue">{v.transaction_count} txns</span>
+                                </Link>
+
                                 {/* in 12 secs */}
                             </p>
                         </div>
@@ -62,7 +68,9 @@ export default function DataList({ txs, blocks, type }: { txs?: Transaction[], b
                         <div className="flex items-center">
                             <HiViewList className="text-3xl" />
                             <div className="ml-10">
-                                <p className="text-lg cursor-pointer text-dark-blue">{v.height}</p>
+                                <Link href={`/tx/${v.id}`}>
+                                    <p className="text-lg cursor-pointer text-dark-blue">{v.height}</p>
+                                </Link>
                                 <p className="text-sm text-gray">{timeFormat(v.timestamp)} </p>
                             </div>
                         </div>
@@ -81,7 +89,7 @@ export default function DataList({ txs, blocks, type }: { txs?: Transaction[], b
                         <div className="p-5 text-xs font-bold border rounded-lg cursor-pointer border-light-gray">
                             {v.status}
                         </div>
-                    </div>
+                    </div >
                 ))
             }
             <Link className="flex items-center justify-center w-full text-center cursor-pointer h-50 bg-off-white text-dark-gray hover:text-dark-blue" href={"/"}>

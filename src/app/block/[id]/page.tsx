@@ -1,6 +1,7 @@
 import React from "react";
-import Block from "@/views/Block"
+
 import { queryBlockDetail } from "@/api"
+import Block from "@/views/block";
 export default async function BlockServer({ params }: { params: { id: string } }) {
 
     // if (params.id.startsWith("0x")) {
@@ -10,5 +11,5 @@ export default async function BlockServer({ params }: { params: { id: string } }
     //   }
     const blockDetail = await queryBlockDetail(params.id)
 
-    return <Block blockDetail ={blockDetail} />
+    return <Block blockDetail={blockDetail} />
 }

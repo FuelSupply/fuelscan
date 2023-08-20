@@ -10,7 +10,7 @@ export interface Block {
     transactions_root: string
     prev_root: string
     timestamp: number
-    count: number
+    transaction_count: number
 
     coinbase?: string
     coinbase_hash?: string

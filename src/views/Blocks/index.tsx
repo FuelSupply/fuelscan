@@ -15,12 +15,14 @@ export default function Block({ blocks }: { blocks: Block[] }) {
 
     const renderBlocks = useCallback(() => {
         return blocks.map(v => (
-            <div key={v.id} className="border-b border-light-gray flex rounded-md h-60 justify-between text-sm items-center">
+            <div key={v.id} className="flex items-center justify-between text-sm border-b rounded-md border-light-gray h-60">
                 <div className="w-[5%]">
                     <Link className="text-dark-blue" href={`/block/${v.id}`}>{v.height}</Link>
                 </div>
                 <div className="w-[8%]">{timeFormat(v.timestamp)}</div>
-                <div className="w-[3%] text-dark-blue">{v.count}</div>
+                <Link className="text-dark-blue" href={`/block/${v.id}`}>
+                    <div className="w-[3%] text-dark-blue">{v.transaction_count}</div>
+                </Link>
                 <div className="w-[5%]">{v.da_height}</div>
                 <div className="w-[20%] flex items-center">
                     <Tooltip title={v.id} className="w-full">
@@ -41,7 +43,7 @@ export default function Block({ blocks }: { blocks: Block[] }) {
 
     return <div className="container mx-auto mt-20">
         <div>
-            <span className="text-2xl mr-10">
+            <span className="mr-10 text-2xl">
                 Blocks
             </span>
         </div>
@@ -84,8 +86,8 @@ export default function Block({ blocks }: { blocks: Block[] }) {
                 <div className="text-xl hover:text-dark-blue">170222</div>
             </div>
         </div>
-        <div className="rounded-md mt-20 border border-light-gray shadow-md p-20 bg-white">
-            <div className="border-b border-light-gray flex rounded-md h-40 justify-between text-sm font-bold">
+        <div className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray">
+            <div className="flex justify-between h-40 text-sm font-bold border-b rounded-md border-light-gray">
                 <div className="w-[5%]">Blocks</div>
                 <div className="w-[8%]">Time</div>
                 <div className="w-[3%]">Txn</div>
@@ -93,7 +95,6 @@ export default function Block({ blocks }: { blocks: Block[] }) {
                 <div className="w-[20%] text-center">Hash</div>
                 <div className="w-[10%]">Coinbase Amount</div>
                 <div className="w-[20%] text-center">Coinbase</div>
-
             </div>
             {renderBlocks()}
         </div>

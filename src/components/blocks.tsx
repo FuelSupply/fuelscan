@@ -8,7 +8,7 @@ export default function Blocks({ block }: { block: Block }) {
                 <div>Height: {block.height}</div>
                 <div>BlockTime:{block.timestamp}</div>
                 <div>L1: {block.da_height}</div>
-                <div>Tx: {block.count}</div>
+                <div>Tx: {block.transaction_count}</div>
             </div>
         </a>
     )

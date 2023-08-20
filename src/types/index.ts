@@ -26,7 +26,7 @@ export interface Block {
     coinbase_hash: Address,
     coinbase_amount: string,
     timestamp: number,
-    count: number
+    transaction_count: number
 }
 
 
