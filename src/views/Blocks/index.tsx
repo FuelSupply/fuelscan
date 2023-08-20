@@ -6,40 +6,78 @@ import { AiOutlineCopy } from "react-icons/ai"
 import { Block } from "@/types";
 import Link from "next/link";
 import { Tooltip } from 'antd';
-import { copyToClipboard } from "@/utils"
-export default function Block({ blocks }: { blocks: Block[] }) {
+import { copyToClipboard, formatAddress } from "@/utils"
+
+import { Space, Table, Tag } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+
+{/* <div className="w-[5%]">Blocks</div>
+<div className="w-[8%]">Time</div>
+<div className="w-[3%]">Txn</div>
+<div className="w-[5%]">L1</div>
+<div className="w-[20%] text-center">Hash</div>
+<div className="w-[10%]">Coinbase Amount</div>
+<div className="w-[20%] text-center">Coinbase</div> */}
+
+const columns: ColumnsType<any> = [
+    {
+        title: 'Blocks',
+        key: 'height',
+        render: (v) => <Link className="text-dark-blue" href={`/block/${v.id}`}>{v.height}</Link>
+    },
+    {
+        title: 'Time',
+        key: 'timestamp',
+        render: (v) => timeFormat(v.timestamp)
+    },
+    {
+        title: 'Txn',
+        key: 'id',
+        render: (v) => <Link className="text-dark-blue" href={`/block/${v.id}`}>
+            {v.transaction_count}
+        </Link>
+    },
+    {
+        title: 'L1',
+        dataIndex: 'da_height',
+        key: 'da_height',
+    },
+    {
+        title: 'Hash',
+        render: (v) => <Tooltip title={v.id} className="flex items-center">
+            <span className="mr-20" > {formatAddress(v.id)}</span>
+            <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.id)} />
+        </Tooltip>
+    },
+    {
+        title: 'Amount',
+        dataIndex: 'coinbase_amount',
+        align: "center"
+    },
+    {
+        title: 'Coinbase',
+        render: (v) => <Tooltip title={v.coinbase} className="flex items-center">
+            <span className="mr-20" > {formatAddress(v.coinbase)}</span>
+            <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.coinbase)} />
+        </Tooltip>
+    },
+];
+
+interface IBlocks {
+    data: Block[],
+    total: number
+
+}
+
+export default function Block({ blocks }: { blocks: IBlocks }) {
 
     useEffect(() => {
         console.log("blocks----", blocks);
     })
 
-    const renderBlocks = useCallback(() => {
-        return blocks.map(v => (
-            <div key={v.id} className="flex items-center justify-between text-sm border-b rounded-md border-light-gray h-60">
-                <div className="w-[5%]">
-                    <Link className="text-dark-blue" href={`/block/${v.id}`}>{v.height}</Link>
-                </div>
-                <div className="w-[8%]">{timeFormat(v.timestamp)}</div>
-                <Link className="text-dark-blue" href={`/block/${v.id}`}>
-                    <div className="w-[3%] text-dark-blue">{v.transaction_count}</div>
-                </Link>
-                <div className="w-[5%]">{v.da_height}</div>
-                <div className="w-[20%] flex items-center">
-                    <Tooltip title={v.id} className="w-full">
-                        <span className="flex-1 truncate" > {v.id}</span>
-                    </Tooltip>
-                    <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.id)} />
-                </div>
-                <div className="w-[10%] text-center">{v.coinbase_amount}</div>
-                <div className="w-[20%] flex items-center">
-                    <Tooltip title={v.coinbase} className="w-full">
-                        <span className="flex-1 truncate" > {v.coinbase}</span>
-                    </Tooltip>
-                    <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.coinbase)} />
-                </div>
-            </div>
-        ))
-    }, [blocks])
+    const handlePageChange = (val:any) =>{
+        console.log(val);
+    }
 
     return <div className="container mx-auto mt-20">
         <div>
@@ -86,17 +124,9 @@ export default function Block({ blocks }: { blocks: Block[] }) {
                 <div className="text-xl hover:text-dark-blue">170222</div>
             </div>
         </div>
-        <div className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray">
-            <div className="flex justify-between h-40 text-sm font-bold border-b rounded-md border-light-gray">
-                <div className="w-[5%]">Blocks</div>
-                <div className="w-[8%]">Time</div>
-                <div className="w-[3%]">Txn</div>
-                <div className="w-[5%]">L1</div>
-                <div className="w-[20%] text-center">Hash</div>
-                <div className="w-[10%]">Coinbase Amount</div>
-                <div className="w-[20%] text-center">Coinbase</div>
-            </div>
-            {renderBlocks()}
-        </div>
+        <Table className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray" columns={columns} dataSource={blocks.data}
+            pagination={{ total: blocks.total}}
+            onChange={handlePageChange}
+        />
     </div>
 }

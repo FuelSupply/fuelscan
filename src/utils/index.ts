@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { message } from "antd"
+import { Address } from "@/types";
 export const timeDifference = (knownTime: number) => {
 
     const currentTime = new Date().getTime();
@@ -25,4 +26,12 @@ export function copyToClipboard(text: string) {
     document.execCommand('copy');
     document.body.removeChild(textarea);
     message.success("copied!")
+}
+
+// format address to 0x123...ab32d, but address length need === 42.
+export const formatAddress = (address: Address) => {
+    const prefix = address.slice(0, 9);
+    const suffix = address.slice(-4);
+    const result = prefix + "..." + suffix;
+    return result;
 }

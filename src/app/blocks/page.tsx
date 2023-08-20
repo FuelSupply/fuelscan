@@ -13,5 +13,5 @@ export default async function BlocksServer() {
 
 
 
-    return <Blocks blocks={blocks.data} />
+    return <Blocks blocks={blocks} />
 }
