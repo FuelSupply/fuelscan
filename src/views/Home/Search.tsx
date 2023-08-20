@@ -2,7 +2,11 @@ import React from "react";
 import {
     FiSearch
 } from 'react-icons/fi';
-export default function Home() {
+import { queryOverview } from "@/api/index"
+
+export default async function Home() {
+    const result = await queryOverview();
+
 
     return <section className="w-full h-280 bg-gray-dark">
         <div className="container relative h-full mx-auto pt-80">
@@ -19,27 +23,27 @@ export default function Home() {
                 <div className="flex items-center">
                     <div className="flex flex-col items-center">
                         <h2 className="text-xl text-gray">Blocks</h2>
-                        <h4 className="text-xl">10 752 264</h4>
+                        <h4 className="text-xl">{result.block_count}</h4>
                     </div>
                     <div className="w-1 ml-20 mr-20 h-30 bg-light-gray"></div>
                     <div className="flex flex-col items-center">
                         <h2 className="text-xl text-gray">Transactions</h2>
-                        <h4 className="text-xl">10 752 264</h4>
+                        <h4 className="text-xl">{result.transaction_count}</h4>
                     </div>
                     <div className="w-1 ml-20 mr-20 h-30 bg-light-gray"></div>
                     <div className="flex flex-col items-center">
                         <h2 className="text-xl text-gray">Addresses</h2>
-                        <h4 className="text-xl">10 752 264</h4>
+                        <h4 className="text-xl">{result.address_count}</h4>
                     </div>
                     <div className="w-1 ml-20 mr-20 h-30 bg-light-gray"></div>
                     <div className="flex flex-col items-center">
                         <h2 className="text-xl text-gray">TPS</h2>
-                        <h4 className="text-xl">20/sec</h4>
+                        <h4 className="text-xl">{result.tps}</h4>
                     </div>
                     <div className="w-1 ml-20 mr-20 h-30 bg-light-gray"></div>
                     <div className="flex flex-col items-center">
-                        <h2 className="text-xl text-gray">Gas Price</h2>
-                        <h4 className="text-xl">1 GWEI</h4>
+                        <h2 className="text-xl text-gray">contract Count</h2>
+                        <h4 className="text-xl">{result.contract_count}</h4>
                     </div>
 
                 </div>
