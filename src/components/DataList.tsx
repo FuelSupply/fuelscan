@@ -92,7 +92,7 @@ export default function DataList({ txs, blocks, type }: { txs?: Transaction[], b
                     </div >
                 ))
             }
-            <Link className="flex items-center justify-center w-full text-center cursor-pointer h-50 bg-off-white text-dark-gray hover:text-dark-blue" href={"/"}>
+            <Link className="flex items-center justify-center w-full text-center cursor-pointer h-50 bg-off-white text-dark-gray hover:text-dark-blue" href={"/txs"}>
                 <span className="text-sm">Views All Transactions</span>
                 <AiOutlineArrowRight className="ml-5" />
             </Link>

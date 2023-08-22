@@ -3,7 +3,7 @@ import { timeFormat } from "@/utils";
 import React, { useCallback, useEffect } from "react";
 import { BsArrowUpRight } from "react-icons/bs"
 import { AiOutlineCopy } from "react-icons/ai"
-import { Block, Pagination } from "@/types";
+import { Block, Pagination, Transaction } from "@/types";
 import Link from "next/link";
 import { Tooltip } from 'antd';
 import { copyToClipboard, formatAddress } from "@/utils"
@@ -14,9 +14,11 @@ import type { ColumnsType } from 'antd/es/table';
 
 const columns: ColumnsType<any> = [
     {
-        title: 'Blocks',
-        key: 'height',
-        render: (v) => <Link className="text-dark-blue" href={`/block/${v.id}`}>{v.height}</Link>
+        title: 'Transaction Hash',
+        render: (v) => <Tooltip title={v.id} className="flex items-center">
+            <Link className="text-dark-blue mr-2" href={`/tx/${v.id}`}>{formatAddress(v.id)}</Link>
+            <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.id)} />
+        </Tooltip>
     },
     {
         title: 'Time',
@@ -24,11 +26,16 @@ const columns: ColumnsType<any> = [
         render: (v) => timeFormat(v.timestamp)
     },
     {
-        title: 'Txn',
-        key: 'id',
-        render: (v) => <Link className="text-dark-blue" href={`/block/${v.id}`}>
-            {v.transaction_count}
-        </Link>
+        title: 'Sender',
+        render: (v) => <Tooltip title={v.id} className="flex items-center">
+            <div className=" mr-2">{formatAddress(v.sender)}</div>
+            <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.sender)} />
+        </Tooltip>
+    },
+    {
+        title: 'Block Height',
+        dataIndex: 'height',
+        key: 'height',
     },
     {
         title: 'L1',
@@ -36,46 +43,52 @@ const columns: ColumnsType<any> = [
         key: 'da_height',
     },
     {
-        title: 'Hash',
-        render: (v) => <Tooltip title={v.id} className="flex items-center">
-            <span className="mr-20" > {formatAddress(v.id)}</span>
-            <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.id)} />
-        </Tooltip>
-    },
-    {
-        title: 'Amount',
-        dataIndex: 'coinbase_amount',
+        title: 'Status',
+        dataIndex: 'status',
         align: "center"
     },
     {
-        title: 'Coinbase',
-        render: (v) => <Tooltip title={v.coinbase} className="flex items-center">
-            <span className="mr-20" > {formatAddress(v.coinbase)}</span>
-            <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.coinbase)} />
-        </Tooltip>
+        title: 'tx_type',
+        dataIndex: 'tx_type',
+        align: "center"
+    },
+    {
+        title: 'Gas Limit ',
+        dataIndex: 'gas_limit',
+        align: "center"
+    },
+    {
+        title: 'Gas Price ',
+        dataIndex: 'gas_price',
+        align: "center"
+    },
+    {
+        title: 'Gas Used',
+        dataIndex: 'gas_used',
+        align: "center"
     },
 ];
 
-interface IBlocks {
-    data: Block[],
+interface ITxs {
+    data: Transaction[],
     total: number
 
 }
 
-export default function Block({ blocks, searchParams }: { blocks: IBlocks, searchParams: Pagination }) {
+export default function Block({ txs, searchParams }: { blocks: ITxs, searchParams: Pagination }) {
     const router = useRouter()
     useEffect(() => {
-        console.log("blocks----", blocks);
+        console.log("txs----", txs);
     })
 
     const handlePageChange = (val: any) => {
-        router.push(`/blocks?current=${val.current}&pageSize=${val.pageSize}`)
+        router.push(`/txs?current=${val.current}&pageSize=${val.pageSize}`)
     }
 
     return <div className="container mx-auto mt-20">
         <div>
             <span className="mr-10 text-2xl">
-                Blocks
+                Transactions
             </span>
         </div>
 
@@ -117,8 +130,8 @@ export default function Block({ blocks, searchParams }: { blocks: IBlocks, searc
                 <div className="text-xl hover:text-dark-blue">170222</div>
             </div>
         </div>
-        <Table className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray" columns={columns} dataSource={blocks.data}
-            pagination={{ total: blocks.total, pageSize: Number(searchParams.pageSize), current: Number(searchParams.current) }}
+        <Table className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray" columns={columns} dataSource={txs.data}
+            pagination={{ total: txs.total, pageSize: Number(searchParams.pageSize), current: Number(searchParams.current) }}
             onChange={handlePageChange}
         />
     </div>

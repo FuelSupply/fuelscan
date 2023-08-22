@@ -13,8 +13,8 @@ export const queryBlock = async (params = { current: "1", pageSize: "10" }) => {
 }
 
 // 查询交易数据
-export const queryTxs = async (params: Pagination) => {
-  const res = await fetch(baseUrl + "/transaction", revalidate)
+export const queryTxs = async (params = { current: "1", pageSize: "10" }) => {
+  const res = await fetch(`${baseUrl}/transaction?page=${params.current}&limit=${params.pageSize}`, revalidate)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
