@@ -42,7 +42,7 @@ export default async function Home() {
                     </div>
                     <div className="w-1 ml-20 mr-20 h-30 bg-light-gray"></div>
                     <div className="flex flex-col items-center">
-                        <h2 className="text-xl text-gray">contract Count</h2>
+                        <h2 className="text-xl text-gray">Contract Count</h2>
                         <h4 className="text-xl">{result.contract_count}</h4>
                     </div>
 

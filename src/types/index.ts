@@ -90,3 +90,7 @@ export interface BlockDetail extends Block {
     transactions: Transaction[]
 }
 
+export interface Pagination {
+    pageSize: string
+    current: string
+}

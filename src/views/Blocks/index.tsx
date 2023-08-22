@@ -3,11 +3,11 @@ import { timeFormat } from "@/utils";
 import React, { useCallback, useEffect } from "react";
 import { BsArrowUpRight } from "react-icons/bs"
 import { AiOutlineCopy } from "react-icons/ai"
-import { Block } from "@/types";
+import { Block, Pagination } from "@/types";
 import Link from "next/link";
 import { Tooltip } from 'antd';
 import { copyToClipboard, formatAddress } from "@/utils"
-
+import { useRouter } from 'next/navigation'
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -69,14 +69,15 @@ interface IBlocks {
 
 }
 
-export default function Block({ blocks }: { blocks: IBlocks }) {
-
+export default function Block({ blocks, searchParams }: { blocks: IBlocks, searchParams: Pagination }) {
+    const router = useRouter()
     useEffect(() => {
         console.log("blocks----", blocks);
     })
 
-    const handlePageChange = (val:any) =>{
+    const handlePageChange = (val: any) => {
         console.log(val);
+        router.push(`/blocks?current=${val.current}&pageSize=${val.pageSize}`)
     }
 
     return <div className="container mx-auto mt-20">
@@ -125,7 +126,7 @@ export default function Block({ blocks }: { blocks: IBlocks }) {
             </div>
         </div>
         <Table className="p-20 mt-20 bg-white border rounded-md shadow-md border-light-gray" columns={columns} dataSource={blocks.data}
-            pagination={{ total: blocks.total}}
+            pagination={{ total: blocks.total, pageSize: Number(searchParams.pageSize), current: Number(searchParams.current) }}
             onChange={handlePageChange}
         />
     </div>

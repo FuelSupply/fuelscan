@@ -30,8 +30,12 @@ export function copyToClipboard(text: string) {
 
 // format address to 0x123...ab32d, but address length need === 42.
 export const formatAddress = (address: Address) => {
+ try {
     const prefix = address.slice(0, 9);
     const suffix = address.slice(-4);
     const result = prefix + "..." + suffix;
     return result;
+ } catch (error) {
+        return "....."
+ }
 }
