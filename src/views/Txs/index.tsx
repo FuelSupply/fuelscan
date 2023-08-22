@@ -23,24 +23,27 @@ const columns: ColumnsType<any> = [
     {
         title: 'Time',
         key: 'timestamp',
+        align: "center",
         render: (v) => timeFormat(v.timestamp)
     },
     {
         title: 'Sender',
-        render: (v) => <Tooltip title={v.id} className="flex items-center">
+        align: "center",
+        render: (v) => <Tooltip title={v.sender} className="flex items-center">
             <div className=" mr-2">{formatAddress(v.sender)}</div>
             <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.sender)} />
-        </Tooltip>
+        </Tooltip>,
+
     },
     {
         title: 'Block Height',
         dataIndex: 'height',
-        key: 'height',
+        align: "center",
     },
     {
         title: 'L1',
         dataIndex: 'da_height',
-        key: 'da_height',
+        align: "center"
     },
     {
         title: 'Status',
