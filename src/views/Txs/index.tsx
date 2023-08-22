@@ -78,7 +78,7 @@ interface ITxs {
 
 }
 
-export default function Block({ txs, searchParams }: { blocks: ITxs, searchParams: Pagination }) {
+export default function Block({ txs, searchParams }: { txs: ITxs, searchParams: Pagination }) {
     const router = useRouter()
     useEffect(() => {
         console.log("txs----", txs);
