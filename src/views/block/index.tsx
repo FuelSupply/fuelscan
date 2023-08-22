@@ -1,7 +1,25 @@
 "use client"
 import { BlockDetail } from "@/types";
-import { timeFormat } from "@/utils";
+import { copyToClipboard, formatAddress, timeFormat } from "@/utils";
 import React, { useEffect } from "react";
+import type { CollapseProps } from 'antd';
+import { Collapse, Tooltip } from 'antd';
+import { AiOutlineCopy } from "react-icons/ai";
+import Link from "next/link";
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
+// const items: CollapseProps['items'] = [
+//     {
+//         key: '1',
+//         label: 'This is panel header 1',
+//         children: <p>{text}</p>,
+//     },
+// ];
 
 export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
     useEffect(() => {
@@ -57,18 +75,7 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.id}
                 </div>
             </div>
-            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
-                <div className="w-1/4">
-                    Transactions:
-                </div>
-                <div className="flex items-center">
-                    <div className="mr-5 text-center rounded-lg cursor-pointer text-steel-blue w-120 bg-off-white">
-                        {blockDetail.transactions.length}
-                        transactions
-                    </div>
-                    in this block
-                </div>
-            </div>
+
             <div className="flex border-b item-center border-light-gray pt-15 pb-15">
                 <div className="w-1/4">
                     Transactions Root:
@@ -109,7 +116,37 @@ export default function Block({ blockDetail }: { blockDetail: BlockDetail }) {
                     {blockDetail.output_messages_root_hash}
                 </div>
             </div>
-
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
+                <div className="w-1/4">
+                    Transactions:
+                </div>
+                <div className="flex items-center">
+                    <div className="mr-5 text-center rounded-lg cursor-pointer text-steel-blue w-120 bg-off-white">
+                        {blockDetail.transactions.length}
+                        transactions
+                    </div>
+                    in this block
+                </div>
+            </div>
+            <div className="flex border-b item-center border-light-gray pt-15 pb-15">
+                <div className="w-1/4">
+                    Transactions List :
+                </div>
+                <Collapse defaultActiveKey={['1']} >
+                    <Collapse.Panel header="Transactions List" key="1">
+                        {
+                            blockDetail.transactions.map(v => (
+                                <div key={v.id} className="pb-10 border-b border-gray-dark">
+                                    <Tooltip title={v.id} className="flex items-center">
+                                        <Link className="text-dark-blue mr-2" href={`/tx/${v.id}`}>{v.id}</Link>
+                                        <AiOutlineCopy className="cursor-pointer" onClick={() => copyToClipboard(v.id)} />
+                                    </Tooltip>
+                                </div>
+                            ))
+                        }
+                    </Collapse.Panel>
+                </Collapse>
+            </div>
         </div>
     </div>
 }
